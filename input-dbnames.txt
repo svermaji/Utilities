@@ -1,4 +1,3 @@
-Number=Long
-Varchar=String
-Varchar2=String
-char=String
+COBATE
+X_YYY hahaha
+"TEST_TEST_XYZ"

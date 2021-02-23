@@ -1,5 +1,6 @@
 package com.sv.utilities;
 
+import com.sv.core.Utils;
 import com.sv.core.exception.AppException;
 import com.sv.core.logger.MyLogger;
 
@@ -88,9 +89,16 @@ public class RootProcessor {
     protected String extractName(String line) {
         char[] chars = line.trim().split(" ")[0].toCharArray();
         StringBuilder sb = new StringBuilder();
+        boolean makeUpper = false;
         for (char c : chars) {
             if ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z')) {
-                sb.append(c);
+                if (sb.length() == 0) {
+                    makeUpper = false;
+                }
+                sb.append(makeUpper ? Character.valueOf(c).toString().toUpperCase() : Character.valueOf(c).toString().toLowerCase());
+                makeUpper = false;
+            } else {
+                makeUpper = true;
             }
         }
         return sb.toString();
