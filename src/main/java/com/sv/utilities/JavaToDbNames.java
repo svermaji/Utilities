@@ -3,14 +3,14 @@ package com.sv.utilities;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 
-public class DbNamesToJava extends RootProcessor {
+public class JavaToDbNames extends RootProcessor {
 
     public static void main(String[] args) {
-        new DbNamesToJava().process();
+        new JavaToDbNames().process();
     }
 
-    public DbNamesToJava() {
-        super("-dbnamestojava.txt");
+    public JavaToDbNames() {
+        super("-javatodbnames.txt");
     }
 
     private void process() {
@@ -18,10 +18,11 @@ public class DbNamesToJava extends RootProcessor {
         writeAllLines(output, convert(lines));
     }
 
+    //todo
     private byte[] convert(List<String> lines) {
         StringBuilder sb = new StringBuilder();
         for (String line : lines) {
-            sb.append("private " + getJavaDataType(line) + " " + extractJavaVarName(line) + ";" + System.lineSeparator());
+            sb.append(extractJavaVarName(line) + ";" + System.lineSeparator());
         }
         return sb.toString().getBytes(StandardCharsets.UTF_8);
     }

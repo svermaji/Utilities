@@ -1,6 +1,5 @@
 package com.sv.utilities;
 
-import com.sv.core.Utils;
 import com.sv.core.exception.AppException;
 import com.sv.core.logger.MyLogger;
 
@@ -16,10 +15,11 @@ import java.util.Map;
 public class RootProcessor {
 
     private final String fn;
+    protected String basePath = "src/main/resources/";
     protected String input = "input";
     protected String output = "output";
 
-    private List<String> dataTypesLines = new ArrayList<>();
+    private final List<String> dataTypesLines;
     protected Map<String, String> dataTypes = new HashMap<>();
     protected MyLogger logger = MyLogger.createLogger("utilities.log");
 
@@ -27,20 +27,20 @@ public class RootProcessor {
         this.fn = fn;
         input += fn;
         output += fn;
-        dataTypesLines = readAllLines(getPathFor("db-types.txt"));
-        processDTs ();
+        dataTypesLines = readAllLines(getPathFor("db-to-java.txt"));
+        processDTs();
     }
 
     private void processDTs() {
         for (String dt : dataTypesLines) {
             logger.log("Processing: " + dt);
-            String [] arr = dt.split("=");
+            String[] arr = dt.split("=");
             dataTypes.put(arr[0].toLowerCase(), arr[1]);
         }
     }
 
     public List<String> readAllLines(String path) {
-        return readAllLines(Paths.get(path));
+        return readAllLines(getPathFor(path));
     }
 
     public List<String> readAllLines(Path path) {
@@ -52,7 +52,7 @@ public class RootProcessor {
     }
 
     public void writeAllLines(String path, byte[] bytes) {
-        writeAllLines(Paths.get(path), bytes);
+        writeAllLines(getPathFor(path), bytes);
     }
 
     public void writeAllLines(Path path, byte[] bytes) {
@@ -72,10 +72,10 @@ public class RootProcessor {
     }
 
     public Path getPathFor(String p) {
-        return Paths.get(p);
+        return Paths.get(basePath + p);
     }
 
-    public String getDataType(String line) {
+    public String getJavaDataType(String line) {
         String lc = line.toLowerCase();
         for (Map.Entry<String, String> entry : dataTypes.entrySet()) {
             String k = entry.getKey();
@@ -86,7 +86,7 @@ public class RootProcessor {
         return "String";
     }
 
-    protected String extractName(String line) {
+    protected String extractJavaVarName(String line) {
         char[] chars = line.trim().split(" ")[0].toCharArray();
         StringBuilder sb = new StringBuilder();
         boolean makeUpper = false;

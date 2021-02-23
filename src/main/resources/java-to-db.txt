@@ -1,0 +1,3 @@
+Long=NUMBER
+String=Varchar2
+DateTime=TimeStamp
