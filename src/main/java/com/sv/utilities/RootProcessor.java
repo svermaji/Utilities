@@ -1,6 +1,7 @@
 package com.sv.utilities;
 
 import com.sv.core.exception.AppException;
+import com.sv.core.logger.MyLogger;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -19,6 +20,7 @@ public class RootProcessor {
 
     private List<String> dataTypesLines = new ArrayList<>();
     protected Map<String, String> dataTypes = new HashMap<>();
+    protected MyLogger logger = MyLogger.createLogger("utilities.log");
 
     public RootProcessor(String fn) {
         this.fn = fn;
@@ -30,6 +32,7 @@ public class RootProcessor {
 
     private void processDTs() {
         for (String dt : dataTypesLines) {
+            logger.log("Processing: " + dt);
             String [] arr = dt.split("=");
             dataTypes.put(arr[0].toLowerCase(), arr[1]);
         }
@@ -68,7 +71,7 @@ public class RootProcessor {
     }
 
     public Path getPathFor(String p) {
-        return Paths.get(input);
+        return Paths.get(p);
     }
 
     public String getDataType(String line) {
