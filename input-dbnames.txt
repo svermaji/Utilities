@@ -1,0 +1,4 @@
+Number=Long
+Varchar=String
+Varchar2=String
+char=String
