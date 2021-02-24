@@ -31,7 +31,7 @@ public class DbNamesToJava extends RootProcessor {
         StringBuilder sb = new StringBuilder();
         for (String line : lines) {
             sb.append("<id name=\"" + extractJavaVarName(line) + "\">" + System.lineSeparator());
-            sb.append("<column name=\"" + extractDbName(line) + "\" nullable=\"false\" length=\"100\">" + System.lineSeparator());
+            sb.append("<column name=\"" + extractDbName(line) + "\" nullable=\"false\" length=\"100\" />" + System.lineSeparator());
             sb.append("</id>" + System.lineSeparator());
         }
         return sb.toString().getBytes(StandardCharsets.UTF_8);
