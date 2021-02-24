@@ -30,9 +30,11 @@ public class DbNamesToJava extends RootProcessor {
     private byte[] convertHbm(List<String> lines) {
         StringBuilder sb = new StringBuilder();
         for (String line : lines) {
-            sb.append("<basic name=\"" + extractJavaVarName(line) + "\">" + System.lineSeparator());
-            sb.append("<column name=\"" + extractDbName(line) + "\" nullable=\"true\" length=\"255\"/>" + System.lineSeparator());
-            sb.append("</basic>" + System.lineSeparator());
+            String dbType = getDbDataType(line);
+            sb.append("<property name=\"" + extractJavaVarName(line) + "\">" + System.lineSeparator());
+            sb.append("<column name=\"" + extractDbName(line) + "\" sql-type=\""
+                    + dbType + "\" length=\""+(dbType.equals("varchar2") ? 255 : 10)+"\"/>" + System.lineSeparator());
+            sb.append("</property>" + System.lineSeparator());
         }
         return sb.toString().getBytes(StandardCharsets.UTF_8);
     }

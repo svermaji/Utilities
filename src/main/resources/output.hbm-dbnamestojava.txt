@@ -1,9 +1,9 @@
-<id name="cobate">
-<column name="COBATE" nullable="false" length="100" />
-</id>
-<id name="xYyy">
-<column name="X_YYY" nullable="false" length="100" />
-</id>
-<id name="testTestXyz">
-<column name="TEST_TEST_XYZ" nullable="false" length="100" />
-</id>
+<property name="cobate">
+<column name="COBATE" sql-type="varchar2" length="255"/>
+</property>
+<property name="xYyy">
+<column name="X_YYY" sql-type="number" length="255"/>
+</property>
+<property name="testTestXyz">
+<column name="TEST_TEST_XYZ" sql-type="varchar2" length="255"/>
+</property>

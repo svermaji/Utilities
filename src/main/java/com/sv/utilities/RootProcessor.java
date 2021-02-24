@@ -88,6 +88,16 @@ public class RootProcessor {
         return "String";
     }
 
+    public String getDbDataType(String line) {
+        String lc = line.toLowerCase();
+        for (Map.Entry<String, String> entry : dataTypes.entrySet()) {
+            String k = entry.getKey();
+            if (lc.contains(k.toLowerCase()))
+                return k;
+        }
+        return "varchar2";
+    }
+
     protected String extractJavaVarName(String line) {
         char[] chars = line.trim().split(" ")[0].toCharArray();
         StringBuilder sb = new StringBuilder();
