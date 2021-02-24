@@ -18,6 +18,7 @@ public class RootProcessor {
     protected String basePath = "src/main/resources/";
     protected String input = "input";
     protected String output = "output";
+    protected String outputhbm = "output.hbm";
 
     private final List<String> dataTypesLines;
     protected Map<String, String> dataTypes = new HashMap<>();
@@ -27,6 +28,7 @@ public class RootProcessor {
         this.fn = fn;
         input += fn;
         output += fn;
+        outputhbm += fn;
         dataTypesLines = readAllLines(getPathFor("db-to-java.txt"));
         processDTs();
     }
@@ -99,6 +101,17 @@ public class RootProcessor {
                 makeUpper = false;
             } else {
                 makeUpper = true;
+            }
+        }
+        return sb.toString();
+    }
+
+    protected String extractDbName(String line) {
+        char[] chars = line.trim().split(" ")[0].toCharArray();
+        StringBuilder sb = new StringBuilder();
+        for (char c : chars) {
+            if ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z')) {
+                sb.append(c);
             }
         }
         return sb.toString();
