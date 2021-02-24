@@ -1,9 +1,9 @@
 <id name="cobate">
-<column name="COBATE" nullable="false" length="100">
+<column name="COBATE" nullable="false" length="100" />
 </id>
 <id name="xYyy">
-<column name="XYYY" nullable="false" length="100">
+<column name="X_YYY" nullable="false" length="100" />
 </id>
 <id name="testTestXyz">
-<column name="TESTTESTXYZ" nullable="false" length="100">
+<column name="TEST_TEST_XYZ" nullable="false" length="100" />
 </id>

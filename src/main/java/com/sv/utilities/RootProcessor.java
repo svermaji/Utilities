@@ -110,7 +110,7 @@ public class RootProcessor {
         char[] chars = line.trim().split(" ")[0].toCharArray();
         StringBuilder sb = new StringBuilder();
         for (char c : chars) {
-            if ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z')) {
+            if ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z') || c == '_') {
                 sb.append(c);
             }
         }
